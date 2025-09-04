@@ -1,0 +1,40 @@
+Ticket-system/
+├── backend/
+│ ├── app/
+│ │ ├── api/
+│ │ │ └── tickets.py
+│ │ ├── core/
+│ │ │ └── config.py
+│ │ ├── crud/
+│ │ │ └── ticket.py
+│ │ ├── db/
+│ │ │ ├── base.py
+│ │ │ └── session.py
+│ │ ├── models/
+│ │ │ ├── ticket.py
+│ │ │ └── user.py
+│ │ ├── schemas/
+│ │ │ └── ticket.py
+│ │ └── main.py
+│ ├── alembic.ini
+│ └── migrations/
+│ ├── env.py
+│ └── versions/
+├── frontend/
+│ ├── index.html
+│ ├── package.json
+│ ├── tsconfig.json
+│ ├── vite.config.ts
+│ └── src/
+│ ├── main.tsx
+│ ├── App.tsx
+│ ├── api.ts
+│ ├── pages/
+│ │ └── Tickets.tsx
+│ └── components/
+│ ├── TicketList.tsx
+│ └── NewTicketForm.tsx
+└── deploy/
+├── Dockerfile.api
+├── Dockerfile.web
+└── docker-compose.yml
