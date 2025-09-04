@@ -2,6 +2,9 @@
 from fastapi.middleware.cors import CORSMiddleware
 #from app.api import tickets
 from backend.app.api import tickets
+from dotenv import load_dotenv;load_dotenv()  # carga .env del dir raiz 
+
+
 app = FastAPI(title="Ticket System")
 
 # Configuración de CORS
