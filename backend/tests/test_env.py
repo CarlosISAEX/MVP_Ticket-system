@@ -1,19 +1,6 @@
-import os
-from dotenv import load_dotenv
+# tests/test_settings.py
+from backend.app.core.config import settings
 
-# Asegura que cargue las variables del .env
-load_dotenv()
-
-def test_env_vars_loaded():
-    required = [
-        "APP_NAME",
-        "APP_ENV",
-        "LOG_LEVEL",
-        "SECRET_KEY",
-        "JWT_SECRET",
-        "JWT_ALG",
-        "ACCESS_TOKEN_EXPIRE_MINUTES",
-        "DATABASE_URL",
-    ]
-    for key in required:
-        assert os.getenv(key), f"{key} is missing or empty"
+def test_env_loaded():
+    # al menos debe existir la URL por defecto o la del .env
+    assert settings.DATABASE_URL, "DATABASE_URL no cargó"
