@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+env/
+*.egg-info/
+
+# IDE
+.vscode/
+.idea/
+
+# Env/Secrets
+.env
+*.env
+
+# Caches/Tests
+.pytest_cache/
+.cache/
+
+# Logs
+*.log
+
+# Alembic: ¡sí versiona migrations!
+# (NO ignores la carpeta migrations/)
