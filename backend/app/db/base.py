@@ -2,7 +2,7 @@
 from sqlalchemy.orm import DeclarativeBase
 from sqlalchemy import MetaData
 
-# Convención de nombres: evita conflictos al alterar constraints/índices
+# Convención de nombres para constraints/índices
 naming_convention = {
     "ix": "ix_%(column_0_label)s",
     "uq": "uq_%(table_name)s_%(column_0_name)s",
@@ -15,3 +15,7 @@ metadata_obj = MetaData(naming_convention=naming_convention)
 
 class Base(DeclarativeBase):
     metadata = metadata_obj
+
+# 👇 IMPORTA LOS MODELOS para registrarlos en Base.metadata
+from backend.app.models.user import User    # noqa: F401
+from backend.app.models.ticket import Ticket  # noqa: F401
