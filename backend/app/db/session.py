@@ -1,13 +1,27 @@
-# backend/app/core/config.py
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from .base import Base
+from backend.app.core.config import settings
 
-from pydantic import BaseSettings
+# Engine de conexión
+engine = create_engine(
+    settings.DATABASE_URL,
+    pool_pre_ping=True,      # valida la conexión antes de usarla
+    future=True              # usa la API 2.0 de SQLAlchemy
+)
 
-class Settings(BaseSettings):
-    DATABASE_URL: str = "postgresql+psycopg:///tickets"
-    API_PREFIX: str = "/api"
-    CORS_ORIGINS: str = "http://localhost:5173"
+# SessionLocal: factoría de sesiones
+SessionLocal = sessionmaker(
+    autocommit=False,
+    autoflush=False,
+    bind=engine,
+    future=True
+)
 
-    class Config:
-        env_file = ".env"
-
-settings = Settings()
+# Dependencia de FastAPI para inyectar la sesión
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
