@@ -1,10 +1,19 @@
-# migrations/env.py
+
+# backend/migrations/env.py
+
 import os
 import sys
+from pathlib import Path
 from logging.config import fileConfig
-
 from alembic import context
 
+# --- Rutas correctas desde backend/migrations ---
+CURRENT_DIR = Path(__file__).resolve().parent           # .../backend/migrations
+REPO_ROOT = CURRENT_DIR.parents[1]                       # .../ (raíz del repo)
+
+# Si prefieres ser explícito: CURRENT_DIR.parents[2] => subir dos niveles (migrations -> backend -> repo)
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
 # --- Asegura que el import 'backend.*' funcione ---
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 REPO_ROOT = os.path.abspath(os.path.join(BASE_DIR, "."))  # raíz del repo
