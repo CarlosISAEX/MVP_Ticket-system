@@ -60,23 +60,22 @@ def test_user_model_mapping():
 
 @pytest.mark.integration
 def test_user_roundtrip_if_table_exists():
-    # Este test solo corre si ya aplicaste migraciones (tabla 'users' creada)
     insp = inspect(engine)
     if not insp.has_table("users"):
         pytest.skip("Tabla 'users' no existe. Corre: alembic upgrade head")
 
     db = SessionLocal()
     try:
-        # ⚠️ No haremos commit: todo se descarta al cerrar la sesión.
         unique_email = f"smoke_{uuid.uuid4().hex[:12]}@example.com"
         u = User(email=unique_email, hashed_password="x")
         db.add(u)
-        # Consulta dentro de la misma sesión/transacción
+        db.flush()        # fuerza el INSERT sin commit
+        db.refresh(u)     # trae server_default (created_at) y PK
+
         fetched = db.query(User).filter_by(email=unique_email).first()
         assert fetched is not None, "No pudo leerse el usuario insertado"
         assert fetched.role == "user", "Default 'user' no aplicado"
         assert fetched.created_at is not None, "created_at no seteado"
     finally:
-        # rollback implícito al no hacer commit
+        db.rollback()     # descarta cambios
         db.close()
-
