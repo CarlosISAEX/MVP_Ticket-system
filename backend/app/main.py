@@ -1,19 +1,12 @@
 ﻿from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-#from app.api import tickets
-from backend.app.api import tickets
-from dotenv import load_dotenv;load_dotenv()  # carga .env del dir raiz 
+from dotenv import load_dotenv; load_dotenv()
 
-
-#from fastapi import FastAPI
-#from fastapi.middleware.cors import CORSMiddleware
 from backend.app.core.config import settings
-
-#app = FastAPI()
+from backend.app.api import api_router
 
 app = FastAPI(title="Ticket System")
 
-# Configuración de CORS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.CORS_ORIGINS,
@@ -22,8 +15,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Incluir rutas
-app.include_router(tickets.router, prefix="/tickets", tags=["tickets"])
+app.include_router(api_router, prefix="/api/v1")
 
 @app.get("/")
 def root():
