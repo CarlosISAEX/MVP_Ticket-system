@@ -1,3 +1,4 @@
+#backend/app/models/ticket.py
 from datetime import datetime
 from sqlalchemy import Integer, String, Text, DateTime, ForeignKey, func
 from sqlalchemy.orm import Mapped, mapped_column

@@ -1,4 +1,5 @@
-﻿from fastapi import APIRouter, Depends, status
+﻿#backend/app/api/routes/tickets.py
+from fastapi import APIRouter, Depends, status
 from sqlalchemy.orm import Session
 from backend.app.db.session import get_db
 from backend.app.models.ticket import Ticket
