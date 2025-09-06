@@ -39,7 +39,7 @@ from backend.app.db.base import Base       # tu declarative Base
 # Importa aquí todos los modelos que quieras que aparezcan en autogenerate:
 from backend.app.models import user  # p.ej. users
 # Si tienes más (ticket, comment, etc.), impórtalos también:
-# from backend.app.models import ticket, comment
+from backend.app.models import ticket #comment
 
 # Config de Alembic
 config = context.config
