@@ -13,7 +13,8 @@ class Settings(BaseSettings):
     APP_NAME: str = "Ticket System API"
     APP_ENV: str = "development"
     API_PREFIX: str = "/api"
-    DATABASE_URL: str = "postgresql+psycopg:///tickets"
+    # En ejecución normal se sobrescribe con la variable DATABASE_URL de .env
+    # DATABASE_URL: str = "postgresql+psycopg:///tickets"
 
     # Nuevas que tu .env ya tiene:
     LOG_LEVEL: str = "INFO"
