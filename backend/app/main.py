@@ -16,7 +16,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(api_router, prefix="/api/v1")
+# Salud simple
+@app.get("/health")
+def health():
+    return {"status": "ok"}
+
+#app.include_router(api_router, prefix="/api/v1")
+app.include_router(api_router, prefix=f"{settings.API_PREFIX}/v1")
 
 @app.get("/")
 def root():
