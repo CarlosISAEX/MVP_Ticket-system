@@ -2,6 +2,7 @@
 
 from datetime import datetime
 from pydantic import BaseModel, Field
+from typing import Optional
 
 class TicketCreate(BaseModel):
     title: str = Field(min_length=1)
@@ -19,3 +20,11 @@ class TicketRead(BaseModel):
     updated_at: datetime
 
     model_config = {"from_attributes": True}  # Pydantic v2
+
+class TicketUpdate(BaseModel):
+    title: Optional[str] = None
+    description: Optional[str] = None
+    status: Optional[str] = None
+    priority: Optional[str] = None
+    assigned_to_id: Optional[int] = None
+    created_by_id: Optional[int] = None
